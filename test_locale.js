@@ -1,5 +1,9 @@
 require('ts-node').register();
 
+// Locale files extracted from Angular master.
+// Three locales are commented out as these are manually checked-in
+// after the tool rewrite to avoid breaking changes. The tool does not
+// generate these anymore.
 const locales = [
     "af-NA.ts",
     "af.ts",
