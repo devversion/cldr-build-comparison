@@ -1,4 +1,4 @@
-require('ts-node').register();
+require('ts-node').register({files: ["types.d.ts"]});
 
 // Locale files extracted from Angular master.
 // Three locales are commented out as these are manually checked-in
@@ -551,6 +551,23 @@ const locales = [
     "zh.ts",
     "zu.ts"
 ];
+
+global.goog = {LOCALE: 'en'}
+
+const newClosure = require('./closure-test/closure-locale');
+const oldClosure = require('./closure-test/closure-locale-old');
+
+Object.keys(oldClosure).forEach(key => {
+    if (!equal(oldClosure[key], newClosure[key])) {
+        console.error('Closure locale files are different:', key);
+    }
+});
+
+Object.keys(newClosure).forEach(newKey => {
+   if (oldClosure[newKey] === undefined) {
+       console.info('Additional new export in the closure file:', newKey);
+   }
+});
 
 locales.forEach(localeBasename => {
     const nonExtName = localeBasename.split('.')[0];

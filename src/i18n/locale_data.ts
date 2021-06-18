@@ -1,0 +1,1 @@
+export function registerLocaleData(data: any, name: string): void {}
